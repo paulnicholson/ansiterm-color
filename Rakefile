@@ -6,7 +6,7 @@ require 'rake/clean'
 require 'rbconfig'
 include Config
 
-PKG_NAME = 'term-ansicolor'
+PKG_NAME = 'ansiterm-color'
 PKG_VERSION = File.read('VERSION').chomp
 PKG_FILES = FileList['**/*'].exclude(/(CVS|\.svn|pkg|coverage|doc)/)
 CLEAN.include 'coverage', 'doc'
@@ -54,11 +54,11 @@ end
 desc m = "Writing version information for #{PKG_VERSION}"
 task :version do
   puts m
-  File.open(File.join('lib', 'term', 'ansicolor', 'version.rb'), 'w') do |v|
+  File.open(File.join('lib', 'ansiterm', 'color', 'version.rb'), 'w') do |v|
     v.puts <<EOT
-module Term
-  module ANSIColor
-    # Term::ANSIColor version
+module ANSITerm
+  module Color
+    # ANSITerm::Color version
     VERSION         = '#{PKG_VERSION}'
     VERSION_ARRAY   = VERSION.split(/\\./).map { |x| x.to_i } # :nodoc:
     VERSION_MAJOR   = VERSION_ARRAY[0] # :nodoc:
@@ -72,7 +72,7 @@ end
 
 desc "Run tests"
 task :tests do
-  sh 'testrb -Ilib tests/*.rb'
+  sh 'ruby -I lib tests/*.rb'
 end
 task :test => :tests
 
